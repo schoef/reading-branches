@@ -1,6 +1,5 @@
 import ROOT
 
-
 # Chain
 chain = ROOT.TChain("Events")
 chain.Add("file_0.root")
@@ -24,8 +23,7 @@ if ROOT.gROOT.GetVersion()<'6.22':
     chain.SetBranchAddress( "Jet_pt", ROOT.AddressOf(myClass, "Jet_pt")) 
 else:
 
-
-    #chain.SetBranchAddress( "met_pt", ROOT.AddressOf(myClass, "met_pt")) 
+    chain.SetBranchAddress( "met_pt", ROOT.AddressOf(myClass, "met_pt")) 
     # --> TypeError: AddressOf() takes exactly 2 arguments (3 given) 
 
     #import ctypes
