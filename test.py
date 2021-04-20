@@ -16,11 +16,21 @@ myClass = ROOT.MyClass()
 
 myClass.init()
 
-# scalar
-chain.SetBranchAddress( "met_pt", ROOT.AddressOf(myClass, "met_pt")) 
-chain.SetBranchAddress( "nJet",   ROOT.AddressOf(myClass, "nJet")) 
-# vector
-chain.SetBranchAddress( "Jet_pt", ROOT.AddressOf(myClass, "Jet_pt")) 
+if ROOT.gROOT.GetVersion()<'6.22':
+    # scalar
+    chain.SetBranchAddress( "met_pt", ROOT.AddressOf(myClass, "met_pt")) 
+    chain.SetBranchAddress( "nJet",   ROOT.AddressOf(myClass, "nJet")) 
+    # vector
+    chain.SetBranchAddress( "Jet_pt", ROOT.AddressOf(myClass, "Jet_pt")) 
+else:
+
+
+    #chain.SetBranchAddress( "met_pt", ROOT.AddressOf(myClass, "met_pt")) 
+    # --> TypeError: AddressOf() takes exactly 2 arguments (3 given) 
+
+    #import ctypes
+    #chain.SetBranchAddress( "met_pt", ctypes.c_void_p(ROOT.addressof(myClass, "met_pt"))) 
+    # -> does not seem to work
 
 # some test output
 for i in range(10):
