@@ -22,8 +22,28 @@ if ROOT.gROOT.GetVersion()<'6.22':
     # vector
     chain.SetBranchAddress( "Jet_pt", ROOT.AddressOf(myClass, "Jet_pt")) 
 else:
+    chain.SetBranchAddress( "met_pt", ROOT.addressof(myClass, "met_pt"))
+#    --produces this error: Traceback (most recent call last):
+#                             File "test.py", line 25, in <module>
+#                               chain.SetBranchAddress( "met_pt", ROOT.addressof(myClass, "met_pt"))
+#                             File "/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.22.06/lib/ROOT/pythonization/_ttree.py", line 34, in _SetBranchAddress
+#                               res = self._OriginalSetBranchAddress(*args)
+#                           TypeError: Template method resolution failed:
+#                             none of the 3 overloaded methods succeeded. Full details:
+#                             int TChain::SetBranchAddress(const char* bname, void* add, TBranch** ptr = 0) =>
+#                               TypeError: could not convert argument 2
+#                             int TChain::SetBranchAddress(const char* bname, void* add, TBranch** ptr, TClass* realClass, EDataType datatype, bool isptr) =>
+#                               TypeError: takes at least 6 arguments (2 given)
+#                             int TChain::SetBranchAddress(const char* bname, void* add, TClass* realClass, EDataType datatype, bool isptr) =>
+#                               TypeError: takes at least 5 arguments (2 given)
+#                             Failed to instantiate "SetBranchAddress(std::string,long)"
 
-    chain.SetBranchAddress( "met_pt", ROOT.AddressOf(myClass, "met_pt")) 
+
+    chain.SetBranchAddress( "nJet",   ROOT.addressof(myClass, "nJet"))
+    # vector
+    chain.SetBranchAddress( "Jet_pt", ROOT.addressof(myClass, "Jet_pt")) 
+    
+    #chain.SetBranchAddress( "Jet_pt", (ROOT.AddressOf(myClass, "Jet_pt"))) 
     # --> TypeError: AddressOf() takes exactly 2 arguments (3 given) 
 
     #import ctypes
