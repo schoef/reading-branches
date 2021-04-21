@@ -27,6 +27,8 @@ else:
     chain.SetBranchAddress( "nJet",   cast['void*'](ROOT.addressof(myClass, "nJet")))
     # vector
     chain.SetBranchAddress( "Jet_pt", cast['void*'](ROOT.addressof(myClass, "Jet_pt"))) 
+
+    #chain.SetBranchAddress( "Jet_pt", ROOT.AddressOf(myClass, "Jet_pt"))
     # --> TypeError: AddressOf() takes exactly 2 arguments (3 given) 
 
     #import ctypes
